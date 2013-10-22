@@ -41,7 +41,7 @@ int main() {
 int get_fibonacci(int number, int& sum) {
     int new_fib_number, fib_one = 1, fib_two = 1;
 
-    for (int i = 0; i < number; i++) {
+    for (int i = 1; i < number; i++) {
         new_fib_number = fib_one + fib_two;
         fib_two = fib_one;
         fib_one = new_fib_number;
