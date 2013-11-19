@@ -33,7 +33,10 @@ int main() {
     char world_two[HEIGHT][WIDTH];
 
     // Seed the random generator.
-    srand(time(0));
+    cout << "Enter a seed to generate the world: ";
+    long results;
+    cin >> results;
+    srand(results);
 
     // Generate and Print the world.
     generate_world(world);
