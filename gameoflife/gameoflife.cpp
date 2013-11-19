@@ -14,7 +14,7 @@ using namespace std;
 
 // Global Constants
 const int WIDTH = 80;
-const int HEIGHT = 20;
+const int HEIGHT = 23;
 const char SPACE = ' ';
 const char BLOCK = '*';
 bool empty = false;
@@ -97,6 +97,7 @@ bool check_cell(char world[][WIDTH], int x, int y) {
 
     // Decides upon the rules to keep the cell alive or kill it.
     if (world[y][x] == BLOCK) {
+        living--;
         if (living == 2 || living == 3)
             results = true;
     }
