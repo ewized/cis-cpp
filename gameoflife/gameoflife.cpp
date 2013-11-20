@@ -24,6 +24,7 @@ void print_world(char [][WIDTH]);
 void generate_world(char [][WIDTH]);
 void generation_world(char [][WIDTH], char [][WIDTH]);
 bool check_cell(char [][WIDTH], int, int);
+long get_seed();
 bool repeat();
 
 // Rule them all with the main function.
@@ -31,28 +32,40 @@ int main() {
     // The WORLD
     char world[HEIGHT][WIDTH];
     char world_two[HEIGHT][WIDTH];
+    int generations = 1;
 
     // Seed the random generator.
-    cout << "Enter a seed to generate the world: ";
-    long results;
-    cin >> results;
-    srand(results);
+    long seed = get_seed();
+    srand(seed);
 
     // Generate and Print the world.
     generate_world(world);
     do {
+        generations++;
         print_world(world);
         generation_world(world, world_two);
         if (!empty) {
             cout << "Press enter to go to the next generation. "
-                 << "Press any key then enter to end.";
+                 << "Press any key then enter to end. ";
         }
         else {
             cout << "All will be dead, press enter to end.";
         }
     } while(repeat() && !empty);
 
+    // Spit out generations.
+    cout << "You went through " << generations << " generations. "
+         << "Your seed was " << seed << "." << endl;
+
     return 0;
+}
+
+// Seed the world.
+long get_seed() {
+    long results = time(0);
+    cout << "Enter a seed to generate the world: ";
+    cin >> results;
+    return results;
 }
 
 // Birth and death of the generation.
@@ -116,7 +129,7 @@ bool check_cell(char world[][WIDTH], int x, int y) {
 void generate_world(char world[][WIDTH]) {
     for (int x = 0; x < WIDTH; x++) {
         for (int y = 0; y < HEIGHT; y++) {
-            int rand = random() % 2;
+            int rand = random() % 8;
             char type;
             if (rand > 0) {
                 type = SPACE;
